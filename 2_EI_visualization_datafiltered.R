@@ -58,7 +58,7 @@ EI_p <- ggplot(ss_df_melt, aes(`Assessment method`, `EI(Kcal)`, fill = `Assessme
 EI_p    
 
   
-#merge group analysis figures in one unique fig
+#merge group analysis figures in one unique fig #######BA plot from EI_analysis_datafiltered
 group_analysis <- ggarrange(BA_p_med, EI_p, nrow = 1, labels = c("A.", "B."))
 group_analysis
 
