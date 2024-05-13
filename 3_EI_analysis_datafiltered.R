@@ -54,7 +54,7 @@ Libro_D <- Libro_D[- (c(which(Libro_D$ID == "P50"))), ]
 summary_df <- data.frame ("ID" = c(1:33,35:49), "In24_mean" = unique(In24_D$Kcal_mean), "In24_med" = unique(In24_D$Kcal_median), 
                              "Libro_mean" = unique(Libro_D$Kcal_mean), "Libro_med" = unique(Libro_D$Kcal_median))
 
-#P19 is 13 years old, exclude it for comparability
+#P19 is 13 years old so has to be excluded
 In24_D <- In24_D[- (c(which(In24_D$ID == "P19"))), ]
 Libro_D <- Libro_D[- (c(which(Libro_D$ID == "P19"))), ]
 summary_df <- summary_df[- (c(which(summary_df$ID == 19))), ]
@@ -143,8 +143,20 @@ icc_L <- icc(Libro_wD[5:8], model = "twoway", type = "agreement", unit ="average
 
 #----DAY CORRELATION WITHIN METHODS-------------------------------------------------------------------------------------
 
-cor.test(In24_wD$day1, In24_wD$day3, method = "spearman")
-cor.test(Libro_wD$day1, Libro_wD$day4, method = "spearman")
+cor.test(In24_wD$day1, In24_wD$day2, method = "spearman") #0.60
+cor.test(In24_wD$day1, In24_wD$day3, method = "spearman") #0.55
+cor.test(In24_wD$day1, In24_wD$day4, method = "spearman") #0.62
+cor.test(In24_wD$day2, In24_wD$day3, method = "spearman") #0.62
+cor.test(In24_wD$day2, In24_wD$day4, method = "spearman") #0.71
+cor.test(In24_wD$day3, In24_wD$day4, method = "spearman") #0.57
+
+
+cor.test(Libro_wD$day1, Libro_wD$day2, method = "spearman") #0.59
+cor.test(Libro_wD$day1, Libro_wD$day3, method = "spearman") #0.58
+cor.test(Libro_wD$day1, Libro_wD$day4, method = "spearman") #0.48
+cor.test(Libro_wD$day2, Libro_wD$day3, method = "spearman") #0.61
+cor.test(Libro_wD$day2, Libro_wD$day4, method = "spearman") #0.50
+cor.test(Libro_wD$day3, Libro_wD$day4, method = "spearman") #0.64
 
 #-----CORRELATION COEFFICIENT-----------------------------------------------------------------------------------------------
 
