@@ -22,7 +22,7 @@ In24 <- In24[-(295:480),]
 Libro <- read.delim("Results_Libro1.txt")
 
 #INTAKE24
-#filter days - remove Kcal; >5000 as might be due to technical errors 
+#filter days - remove Kcal >5000 as might be due to technical errors 
 In24_D <- In24[grep("day", In24$Day), c("ID", "Day", "Energy..kcal.")]
 In24_D <- In24_D[- (c(which((In24_D$Energy..kcal. > 5000)))),] 
 
@@ -46,7 +46,6 @@ intersect((unique(In24_D$ID)), (unique(Libro_D$ID)))
 
 #P50 is missing so exclude it
 Libro_D <- Libro_D[- (c(which(Libro_D$ID == "P50"))), ]
-
 
 
 #create a df with unique row per ID and summary measure
@@ -119,7 +118,7 @@ range_Libro_p
 #arrange two plots in one figure
 ggarrange(range_in24_p, range_Libro_p,ncol = 1, labels = c("A.", "B."))
 
-#t test # np as ranges are not normally distributed
+#t test #np as ranges are not normally distributed
 wilcox.test(unique(In24_D$range_Kcal), unique(Libro_D$range_Kcal), paired = T)
 
 
@@ -318,8 +317,6 @@ kappa_stats <- kappa2(summary_df[,8:9], weight = "squared")
 #kappa stats for cat (Q) derived from medians is slightly higher (0.37) and significant (p=0.01)
 
 
-
-
 #MIXED MODEL------------------------------------------------------------------------------------------------------------------------------
 
 library(lmerTest)
@@ -339,22 +336,10 @@ summ_lm1 <- summary(lm1)
 
 
 # Check model assumptions
-
 library(performance)
 
 check_model(lm1)
 
-
-------------------------
-  # Calculate the bias and its confidence interval
-
-
-lower_CI <- bias - 1.96 * sd(summary_df$med_diff) / sqrt(length(summary_df$med_diff))
-upper_CI <- bias + 1.96 * sd(summary_df$med_diff) / sqrt(length(summary_df$med_diff))
-
-# Calculate the limits of agreement
-lower_loa <- bias - 1.96 * sd(summary_df$med_diff)
-upper_loa <- bias + 1.96 * sd(summary_df$med_diff)
 
 
 
