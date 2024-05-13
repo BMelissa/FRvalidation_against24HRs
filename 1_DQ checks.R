@@ -1,7 +1,6 @@
 #QUALITY CHECKS AND DATA CLEANING
 
-#recalls with less than 10items
-#recalls for les than 400kcal
+#recalls for less than 400kcal
 #recalls for more than 4500kcal
 
 library(ggplot2)
